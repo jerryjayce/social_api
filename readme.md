@@ -10,12 +10,12 @@ localhost:3000
 
 ## Prepare DB (postgre)
 
-### Create a db named `cat_manager`
+### Create a db named `social`
 
 
 ### Edit config file located at `database -> sql -> config -> config.json` to match your local db config
 
-### Run migration `npx sequelize-cldb:migrate`
+### Run migration `npx sequelize-cli db:migrate`
 
 ### Run`npx sequelize-cli db:seed:all` to generate test data
 
