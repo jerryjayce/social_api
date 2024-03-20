@@ -1,17 +1,15 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import {convert_to_mutable} from "../../utils/DataMethods"
-import {ResponseObject, ResponseObjectInterface} from '../../utils/ResponseObject';
-import {AuthRepository} from "../repositories";
+import { convert_to_mutable } from "../../utils/DataMethods";
+import { ResponseObject, ResponseObjectInterface } from "../../utils/ResponseObject";
+import { AuthRepository } from "../repositories";
 import SignupDto from "../dto/signup.dto";
-
-
 
 
 export class AuthService {
     static async login(email: string, password: string): Promise<ResponseObjectInterface> {
 
-        const response = new ResponseObject('Success', 200, {});
+        const response = new ResponseObject("Success", 200, {});
 
         try {
 
@@ -58,9 +56,9 @@ export class AuthService {
 
     }
 
-    static async signup(data: SignupDto) : Promise<ResponseObjectInterface> {
+    static async signup(data: SignupDto): Promise<ResponseObjectInterface> {
 
-        const response = new ResponseObject('Success', 201, {});
+        const response = new ResponseObject("Success", 201, {});
 
         try {
 
@@ -84,12 +82,11 @@ export class AuthService {
             const user_details = convert_to_mutable(result);
 
 
-
             // remove sensitive data
             delete user_details.password;
 
 
-            response.message = 'Signup successful';
+            response.message = "Signup successful";
             response.data = user_details;
 
 
@@ -113,17 +110,30 @@ export class AuthService {
 
         try {
 
-            response.data = await AuthRepository.fetch_users();
+            const result = await convert_to_mutable(AuthRepository.fetch_users());
+            const users_details = [];
+
+            // remove sensitive data
+            result.map(user => {
+
+                delete user.password;
+                users_details.push(user);
+
+            });
+
+
+            response.data = users_details;
             return response;
 
         } catch (e) {
+
             console.log("An error while fetching comment", e);
             response.message = "An error while fetching comment";
             response.http_status = 500;
             return response;
+
         }
     }
-
 
 
 }
