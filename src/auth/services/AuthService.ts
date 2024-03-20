@@ -61,7 +61,7 @@ export class AuthService {
 
     static async signup(data: SignupDto) : Promise<ResponseObjectInterface> {
 
-        const response = new ResponseObject('Success', 200, {});
+        const response = new ResponseObject('Success', 201, {});
 
         try {
 
