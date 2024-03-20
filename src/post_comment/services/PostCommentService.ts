@@ -29,25 +29,13 @@ export class PostCommentService {
 
     }
 
-    static async fetch_video_comments(req): Promise<ResponseObjectInterface> {
-        // const response = response_object;
-        const response = new ResponseObject("Success", 200, {});
+    static async fetch_posts_by_user_id(req): Promise<ResponseObjectInterface> {
 
+        const response = new ResponseObject("Success", 200, {});
 
         try {
 
-
-            const is_valid_ObjectId = mongoose.Types.ObjectId.isValid(req.params.video_id);
-            const video_comments = is_valid_ObjectId ? await PostCommentRepository.fetch_video_comments(req.params.video_id) : false;
-
-            if (!video_comments || !is_valid_ObjectId) {
-
-                response.message = "Video does not exist";
-                response.http_status = 422;
-                return response;
-
-            }
-            response.data = await PostCommentRepository.fetch_video_comments(req.params.video_id);
+            response.data = await PostCommentRepository.fetch_posts_by_user_id(req.params.user_id);
 
             return response;
 

@@ -35,10 +35,10 @@ export default class PostCommentController {
     }
 
 
-    static async fetch_video_comments(req: Request, res: Response) {
+    static async fetch_posts_by_user_id(req: Request, res: Response) {
         try {
 
-            const data: ResponseObjectInterface = await PostCommentService.fetch_video_comments(req);
+            const data: ResponseObjectInterface = await PostCommentService.fetch_posts_by_user_id(req);
             return ResponseHelper.send_response(res, data?.http_status || 200, data.data, data.message);
 
         } catch (e) {

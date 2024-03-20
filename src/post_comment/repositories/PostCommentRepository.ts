@@ -1,18 +1,16 @@
-import models from '../../../database/mysql/models';
+import models from "../../../database/mysql/models";
 
 
 export class PostCommentRepository {
 
-    static async fetch_video_comments(id: string): Promise<any> {
+    static async fetch_posts_by_user_id(user_id: string): Promise<any> {
         try {
-            // return await models.Videos
-            //     .findOne({_id: id})
-            //     .populate({
-            //         path: "comments",
-            //         populate: {
-            //             path: "reply",
-            //         }
-            //     })
+            return await models.post.findAll({
+                raw: true,
+                where: {
+                    user_id
+                }
+            });
 
         } catch (e) {
             throw new Error(`error fetching video ${e}`);
@@ -83,8 +81,6 @@ export class PostCommentRepository {
             throw new Error(`error posting comment ${e}`);
         }
     }
-
-
 
 
 }
