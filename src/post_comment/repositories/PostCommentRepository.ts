@@ -18,22 +18,6 @@ export class PostCommentRepository {
 
     }
 
-    static async fetch_video(id: string): Promise<any> {
-        try {
-            // return await models.Videos
-            //     .findOne({_id: id})
-            //     .populate({
-            //         path: "post_comment",
-            //         populate: {
-            //             path: "reply",
-            //         }
-            //     })
-
-        } catch (e) {
-            throw new Error(`error fetching video ${e}`);
-        }
-
-    }
 
     static async create_post(post_data: object): Promise<any> {
 
@@ -48,9 +32,15 @@ export class PostCommentRepository {
         }
     }
 
-    static async fetch_comment(id: string): Promise<any> {
+    static async fetch_post_by_id(id: number): Promise<any> {
         try {
-            // return await models.Comments.findOne({_id: id})
+
+            return await models.post.findOne({
+                raw: true,
+                where: {
+                    id
+                }
+            });
 
         } catch (e) {
             throw new Error(`error fetching comment ${e}`);
@@ -58,29 +48,19 @@ export class PostCommentRepository {
 
     }
 
-    static async reply_comment(reply_data: string): Promise<any> {
+    static async comment_on_post(post_data: object): Promise<any> {
 
         try {
 
-            // const new_reply = new models.Replies(reply_data);
-            // return await new_reply.save();
+            return await models.comment.create(post_data).then(data => {
+                return data;
+            });
 
         } catch (e) {
-            throw new Error(`error replying comment ${e}`);
+            throw new Error(`error posting content ${e}`);
         }
     }
 
-    static async like_comment(like_data: string): Promise<any> {
-
-        try {
-
-            // const new_comment = new models.Likes(like_data);
-            // return await new_comment.save();
-
-        } catch (e) {
-            throw new Error(`error posting comment ${e}`);
-        }
-    }
 
 
 }

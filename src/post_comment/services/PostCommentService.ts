@@ -47,72 +47,36 @@ export class PostCommentService {
         }
     }
 
-    static async reply_comment(req): Promise<ResponseObjectInterface> {
+    static async comment_on_post(req): Promise<ResponseObjectInterface> {
 
         const response = new ResponseObject("Success", 200, {});
 
-
         try {
 
+            const post_exist = await PostCommentRepository.fetch_post_by_id(req.body.post_id);
 
-            const is_valid_ObjectId = mongoose.Types.ObjectId.isValid(req.params.comment_id);
-            const comment_exist = is_valid_ObjectId ? await PostCommentRepository.fetch_comment(req.params.comment_id) : false;
+            if (!post_exist ) {
 
-
-            if (!comment_exist || !is_valid_ObjectId) {
-                response.message = "Comment does not exist";
+                response.message = "Post does not exist";
                 response.http_status = 422;
                 return response;
 
             }
 
             const data = {
-                ...req.body,
-                comment: req.params.comment_id
+                comment: req.body.comment,
+                post_id: req.body.post_id,
+                user_id: req.body.user.id
+
             };
 
-            response.data = await PostCommentRepository.reply_comment(data);
+            response.data = await PostCommentRepository.comment_on_post(data);
 
             return response;
 
         } catch (e) {
-            console.log("An error while posting post_comment", e);
-            response.message = "An error while posting post_comment";
-            response.http_status = 500;
-            return response;
-        }
-
-    }
-
-    static async like_comment(req): Promise<ResponseObjectInterface> {
-
-        const response = new ResponseObject("Success", 200, {});
-
-        try {
-
-            const is_valid_ObjectId = mongoose.Types.ObjectId.isValid(req.params.comment_id);
-            const comment_exist = is_valid_ObjectId ? await PostCommentRepository.fetch_comment(req.params.comment_id) : false;
-
-            if (!comment_exist || !is_valid_ObjectId) {
-
-                response.message = "Comment does not exist";
-                response.http_status = 422;
-                return response;
-
-            }
-
-            const data = {
-                ...req.body,
-                comment: req.params.comment_id     //ref to post_comment
-            };
-
-            response.data = await PostCommentRepository.like_comment(data);
-
-            return response;
-
-        } catch (e) {
-            console.log("An error while posting post_comment", e);
-            response.message = "An error while posting post_comment";
+            console.log("An error while posting comment", e);
+            response.message = "An error while posting comment";
             response.http_status = 500;
             return response;
         }

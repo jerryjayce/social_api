@@ -5,6 +5,7 @@ import { PostCommentService } from "../services";
 import { ResponseHelper } from "../../utils/ResponseHelper";
 import {ResponseObjectInterface} from '../../utils/ResponseObject';
 import CreatePostDto from "../dto/CreatePost.dto";
+import PostCommentDto from "../dto/PostComment.dto";
 import { validate } from "class-validator";
 import { class_validator_error_formatter } from "../../utils/ClassValidatorErrorFormatter";
 
@@ -48,23 +49,18 @@ export default class PostCommentController {
     }
 
 
-    static async reply_comment(req: Request, res: Response) {
+    static async comment_on_post(req: Request, res: Response) {
         try {
 
-            const data: ResponseObjectInterface = await PostCommentService.reply_comment(req);
-            return ResponseHelper.send_response(res, data?.http_status || 200, data?.data, data?.message);
+            const post_comment = new PostCommentDto(req.body);
+            const errors = await validate(post_comment);
 
-        } catch (e) {
-            console.log(e);
-            return ResponseHelper.send_response(res, 500, {});
-        }
-    }
+            if (errors.length > 0) {
+                const formatted_error =  class_validator_error_formatter(errors);
+                return ResponseHelper.send_response(res,  422, formatted_error);
+            }
 
-
-    static async like_comment(req: Request, res: Response) {
-        try {
-
-            const data: ResponseObjectInterface = await PostCommentService.like_comment(req);
+            const data: ResponseObjectInterface = await PostCommentService.comment_on_post(req);
             return ResponseHelper.send_response(res, data?.http_status || 200, data?.data, data?.message);
 
         } catch (e) {
