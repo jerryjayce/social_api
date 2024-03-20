@@ -1,40 +1,30 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import {
-  IsNotEmpty,
-  IsString,
-  IsEmail,
-  IsNumberString,
-  Length,
-  // IsBase64,
-  // IsInt,
-  // IsDateString,
-  // IsAlpha
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber, IsNumberString, IsString, Length } from "class-validator";
 
-export default class LoginDto {
+export default class SignUpDto {
 
-  @IsString()
-  @IsNotEmpty()
-  first_name: string;
+    @IsString()
+    @IsNotEmpty()
+        full_name: string;
 
-  @IsString()
-  @IsNotEmpty()
-  last_name: string;
+    @IsNumber()
+    @IsNotEmpty()
+        age: string;
 
-  @IsEmail()
-  email: string;
+    @IsEmail()
+        email: string;
 
-  @Length(11, 11)
-  @IsNumberString()
-  @IsNotEmpty()
-  phone: string;
+    @IsString()
+    @IsNotEmpty()
+        password: string;
 
-  @IsString()
-  @IsNotEmpty()
-  password: string;
+    @Length(11, 11)
+    @IsNumberString()
+    @IsNotEmpty()
+        phone: string;
 
-  constructor(data: Partial<LoginDto>) {
-    Object.assign(this, data);
-  }
+
+    constructor(data: Partial<SignUpDto>) {
+        Object.assign(this, data);
+    }
 
 }

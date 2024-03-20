@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import {ResponseObject} from '../../utils/ResponseObject';
+import {convert_to_mutable} from "../../utils/DataMethods"
+import {ResponseObject, ResponseObjectInterface} from '../../utils/ResponseObject';
 
 
 
@@ -10,7 +11,7 @@ import SignupDto from "../dto/signup.dto";
 
 
 export class AuthService {
-    static async login(email: string, password: string): Promise<object> {
+    static async login(email: string, password: string): Promise<ResponseObjectInterface> {
 
         const response = new ResponseObject('Success', 200, {});
 
@@ -58,12 +59,11 @@ export class AuthService {
 
     }
 
-    static async signup(data: SignupDto) {
+    static async signup(data: SignupDto) : Promise<ResponseObjectInterface> {
+
+        const response = new ResponseObject('Success', 200, {});
+
         try {
-
-            const response = new ResponseObject('Success', 200, {});
-
-
 
             const user_exist = await AuthRepository.get_user_by_email(data.email.toLowerCase());
 
@@ -82,23 +82,27 @@ export class AuthService {
 
 
             const result = await AuthRepository.signup(data);
+            const user_details = convert_to_mutable(result);
 
 
 
             // remove sensitive data
-            delete result.password;
-            delete result.role;
+            delete user_details.password;
 
 
             response.message = 'Signup successful';
-            response.data = result;
+            response.data = user_details;
 
 
             return response;
 
         } catch (e) {
-            console.log(e);
-            throw new Error(`${e}`);
+
+            console.log("An error occurred during sign up", e);
+            response.message = "An error occurred during sign up";
+            response.http_status = 500;
+            return response;
+
         }
     }
 

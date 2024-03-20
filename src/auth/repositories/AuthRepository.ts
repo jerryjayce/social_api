@@ -1,7 +1,7 @@
 import SignupDto from "../dto/signup.dto";
 
 
-// import models from '../../../database/mongo_db/models';
+import models from '../../../database/mysql/models';
 
 
 
@@ -12,8 +12,12 @@ export class AuthRepository {
     static async get_user_by_email(email: string): Promise<any> {
         try {
 
-            // const user: Document = await models.Users.findOne({ email: email });
-            // return user;
+            return await models.user.findOne({
+                raw: true,
+                where: {
+                    email: email
+                }
+            });
 
         } catch (e) {
             console.log("error fetching user details", e);
@@ -25,8 +29,9 @@ export class AuthRepository {
 
         try {
 
-            // const newUser = new models.Users(user_details);
-            // return  await newUser.save();
+            return await models.user.create(user_details).then(data => {
+                return data;
+            });
 
         } catch (e) {
             throw new Error(`error adding user ${e}`);
