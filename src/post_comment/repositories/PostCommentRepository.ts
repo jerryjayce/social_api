@@ -1,7 +1,7 @@
-// import models from '../../../database/mongo_db/models';
+import models from '../../../database/mysql/models';
 
 
-export class CommentRepository {
+export class PostCommentRepository {
 
     static async fetch_video_comments(id: string): Promise<any> {
         try {
@@ -25,7 +25,7 @@ export class CommentRepository {
             // return await models.Videos
             //     .findOne({_id: id})
             //     .populate({
-            //         path: "comment",
+            //         path: "post_comment",
             //         populate: {
             //             path: "reply",
             //         }
@@ -37,16 +37,16 @@ export class CommentRepository {
 
     }
 
-    static async post_comment(comment_data: string): Promise<any> {
+    static async create_post(post_data: object): Promise<any> {
 
         try {
 
-            // const new_comment = new models.Comments(comment_data);
-            // return await new_comment.save();
-
+            return await models.post.create(post_data).then(data => {
+                return data;
+            });
 
         } catch (e) {
-            throw new Error(`error posting comment ${e}`);
+            throw new Error(`error posting content ${e}`);
         }
     }
 

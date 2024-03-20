@@ -1,0 +1,1 @@
+export { PostCommentRepository } from './PostCommentRepository';

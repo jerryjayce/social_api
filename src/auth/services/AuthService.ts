@@ -127,8 +127,8 @@ export class AuthService {
 
         } catch (e) {
 
-            console.log("An error while fetching comment", e);
-            response.message = "An error while fetching comment";
+            console.log("An error while fetching post_comment", e);
+            response.message = "An error while fetching post_comment";
             response.http_status = 500;
             return response;
 

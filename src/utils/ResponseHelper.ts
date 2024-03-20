@@ -17,7 +17,7 @@ export class ResponseHelper {
             message: message || data?.message || ""
         };
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // eslint-disable-next-line @typescript-eslint/ban-ts-post_comment
         // @ts-ignore
         delete response?.data?.message;
 

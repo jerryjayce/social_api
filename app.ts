@@ -19,7 +19,7 @@ app.options("*", cors());
 app.use(bodyParser.json());
 
 
-app.use("/", Routes);
+app.use("/v1", Routes);
 
 function error404(req: Request, res: Response) {
     return res.status(404).send({

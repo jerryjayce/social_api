@@ -8,14 +8,14 @@ module.exports = {
             {
                 user_id: 1,
                 post_id: 1,
-                comment: "This is a comment on the first post.",
+                comment: "This is a post_comment on the first post.",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
                 user_id: 1,
                 post_id: 1,
-                comment: "Another comment on the first post.",
+                comment: "Another post_comment on the first post.",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
