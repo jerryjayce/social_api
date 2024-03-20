@@ -22,8 +22,8 @@ const auth = (req, res, next) => {
                     if (!err) {
 
                         const user = decoded;
-                        if (user && user._id && user.name && user.email) {
-                            user.user_id = user._id;
+                        if (user && user.id && user.full_name && user.email) {
+                            user.user_id = user.id;
                             req.body['user'] = user;
                             next();
 
