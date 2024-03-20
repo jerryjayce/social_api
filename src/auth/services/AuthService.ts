@@ -15,7 +15,7 @@ export class AuthService {
 
         try {
 
-            const user_details = await AuthRepository.get_user_by_email(email);
+            let user_details = await AuthRepository.get_user_by_email(email.toLowerCase());
 
             if (!user_details) {
 
@@ -33,10 +33,11 @@ export class AuthService {
                 return response;
             }
 
+            user_details = convert_to_mutable(user_details);
 
-            //TODO remove sensitive data
+            // remove sensitive data
             delete user_details.password;
-            delete user_details.role;
+
 
             response.data = {
                 user_details,

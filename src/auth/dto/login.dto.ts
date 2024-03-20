@@ -1,56 +1,15 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import {
-  IsNotEmpty,
-  // IsBase64,
-  IsString,
-  IsEmail,
-  IsInt
-  // IsNumberString,
-  // Length,
-  // IsDateString,
-  // IsAlpha
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 
-export class LoginDto {
-  // @IsNumberString()
-  // @Length(10, 10)
-  // accountNumber: string;
+export default class LoginDto {
 
-  @IsInt()
-  amount: number;
+    @IsString()
+    @IsNotEmpty()
+        password: string;
 
-  // @IsInt()
-  // bankId: number;
-  //
-  @IsString()
-  @IsNotEmpty()
-  password: string;
+    @IsEmail()
+        email: string;
 
-  @IsEmail()
-  email: string;
-  //
-  // @IsDateString()
-  // endDate: string;
-  //
-  // @IsAlpha()
-  // firstName: string;
-  //
-  // @IsAlpha()
-  // lastName: string;
-  //
-  // @IsNumberString()
-  // merchantId: string;
-  //
-  // @IsString()
-  // @IsNotEmpty()
-  // narration: string;
-  //
-  // @IsNumberString()
-  // phone: string;
-  //
-  // @IsBase64()
-  // signature: string;
-  //
-  // @IsDateString()
-  // startDate: string;
+    constructor(data: Partial<LoginDto>) {
+        Object.assign(this, data);
+    }
 }

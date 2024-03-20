@@ -6,7 +6,7 @@ import {auth} from "../middleware/Authorization";
 
 
 app.use("/v1/auth", AuthRoutes);
-app.use("/v1", auth, CommentRoutes);
+app.use("/v1/comment", auth, CommentRoutes);
 export  default app;
 
 
