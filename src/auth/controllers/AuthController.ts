@@ -48,4 +48,17 @@ export default class AuthController {
             return ResponseHelper.send_response(res, 500, {});
         }
     }
+
+    static async fetch_users(req: Request, res: Response) {
+        try {
+
+            const data: ResponseObjectInterface = await AuthService.fetch_users();
+
+            return ResponseHelper.send_response(res, data?.http_status || 200, data.data, data.message);
+
+        } catch (e) {
+            console.log(e);
+            return ResponseHelper.send_response(res, 500, {});
+        }
+    }
 }

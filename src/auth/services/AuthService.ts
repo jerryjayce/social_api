@@ -2,11 +2,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {convert_to_mutable} from "../../utils/DataMethods"
 import {ResponseObject, ResponseObjectInterface} from '../../utils/ResponseObject';
-
-
-
 import {AuthRepository} from "../repositories";
 import SignupDto from "../dto/signup.dto";
+
 
 
 
@@ -105,6 +103,26 @@ export class AuthService {
 
         }
     }
+
+
+    static async fetch_users(): Promise<ResponseObjectInterface> {
+        // const response = response_object;
+        const response = new ResponseObject("Success", 200, {});
+
+
+        try {
+
+            response.data = await AuthRepository.fetch_users();
+            return response;
+
+        } catch (e) {
+            console.log("An error while fetching comment", e);
+            response.message = "An error while fetching comment";
+            response.http_status = 500;
+            return response;
+        }
+    }
+
 
 
 }

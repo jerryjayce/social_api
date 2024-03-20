@@ -1,10 +1,5 @@
 import SignupDto from "../dto/signup.dto";
-
-
-import models from '../../../database/mysql/models';
-
-
-
+import models from "../../../database/mysql/models";
 
 
 export class AuthRepository {
@@ -37,4 +32,16 @@ export class AuthRepository {
             throw new Error(`error adding user ${e}`);
         }
     }
+
+    static async fetch_users(): Promise<any> {
+        try {
+
+            return await models.user.findAll({ raw: true });
+
+        } catch (e) {
+            console.log("error fetching user details", e);
+        }
+
+    }
+
 }
