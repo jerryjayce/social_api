@@ -1,7 +1,6 @@
 import { ResponseObject, ResponseObjectInterface } from "../../utils/ResponseObject";
 
 import { PostCommentRepository } from "../repositories";
-import mongoose from "mongoose";
 
 
 export class PostCommentService {
@@ -82,6 +81,25 @@ export class PostCommentService {
         }
 
     }
+
+    static async fetch_top_posts_by_users(): Promise<ResponseObjectInterface> {
+
+        const response = new ResponseObject("Success", 200, {});
+
+        try {
+
+            response.data = await PostCommentRepository.fetch_top_posts_by_users();
+
+            return response;
+
+        } catch (e) {
+            console.log("An error while fetching post_comment", e);
+            response.message = "An error while fetching post_comment";
+            response.http_status = 500;
+            return response;
+        }
+    }
+
 
 
 }

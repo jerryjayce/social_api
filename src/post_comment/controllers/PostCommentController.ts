@@ -48,6 +48,18 @@ export default class PostCommentController {
         }
     }
 
+    static async fetch_top_posts_by_users(req: Request, res: Response) {
+        try {
+
+            const data: ResponseObjectInterface = await PostCommentService.fetch_top_posts_by_users();
+            return ResponseHelper.send_response(res, data?.http_status || 200, data.data, data.message);
+
+        } catch (e) {
+            console.log(e);
+            return ResponseHelper.send_response(res, 500, {});
+        }
+    }
+
 
     static async comment_on_post(req: Request, res: Response) {
         try {
