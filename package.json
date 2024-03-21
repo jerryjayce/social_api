@@ -13,9 +13,9 @@
     "seed:all": "npx sequelize-cli db:seed:all",
     "seed:undo": "npx sequelize-cli db:seed:undo",
     "prepare-db": "npm run migration:run && npm run seed:all",
-    "build": "tsc",
+    "build": "tsc && cp -r database dist/",
     "test": "ts-mocha tests/*.ts",
-    "start": "node dist/app.js"
+    "start": "node ./dist/app.js"
   },
   "author": "Jeremiah Ezuzu",
   "license": "UNLICENSED",
