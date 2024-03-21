@@ -15,7 +15,7 @@
     "prepare-db": "npm run migration:run && npm run seed:all",
     "build": "tsc",
     "test": "ts-mocha tests/*.ts",
-    "start": "node app.js"
+    "start": "node dist/app.js"
   },
   "author": "Jeremiah Ezuzu",
   "license": "UNLICENSED",
