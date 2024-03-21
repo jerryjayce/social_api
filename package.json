@@ -13,7 +13,7 @@
     "seed:all": "npx sequelize-cli db:seed:all",
     "seed:undo": "npx sequelize-cli db:seed:undo",
     "prepare-db": "npm run migration:run && npm run seed:all",
-    "build": "tsc && cp -r database dist/",
+    "build": "tsc",
     "test": "ts-mocha tests/*.ts",
     "start": "node ./dist/app.js"
   },
