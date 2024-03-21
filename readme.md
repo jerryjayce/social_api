@@ -10,14 +10,12 @@ localhost:3000
 
 ## Prepare DB (postgre)
 
-### Create a db named `social`
+### Create a db
 
+### Edit config file located at `database -> mysql -> config -> config.json` to match your local db config
 
-### Edit config file located at `database -> sql -> config -> config.json` to match your local db config
-
-
+### In your terminal, navigate to the following location `database -> mysql`
 ### Run migration `npx sequelize-cli db:migrate`
-
 ### Run`npx sequelize-cli db:seed:all` to generate test data
 
 ## Run Tests
