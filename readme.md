@@ -3,8 +3,8 @@
 ## Start App (Locally)
 
 
-`npm install`\
-`npm run dev:live`
+### `npm install`
+### `npm run dev:live`
 
 localhost:3000
 
@@ -15,10 +15,13 @@ localhost:3000
 
 ### Edit config file located at `database -> sql -> config -> config.json` to match your local db config
 
+
 ### Run migration `npx sequelize-cli db:migrate`
 
 ### Run`npx sequelize-cli db:seed:all` to generate test data
 
+## Run Tests
+### `npm test`
 
 ## Postman collection
 
