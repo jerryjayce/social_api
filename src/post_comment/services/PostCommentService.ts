@@ -52,7 +52,7 @@ export class PostCommentService {
 
         try {
 
-            const post_exist = await PostCommentRepository.fetch_post_by_id(req.body.post_id);
+            const post_exist = await PostCommentRepository.fetch_post_by_id(req.params.post_id);
 
             if (!post_exist ) {
 
@@ -64,7 +64,7 @@ export class PostCommentService {
 
             const data = {
                 comment: req.body.comment,
-                post_id: req.body.post_id,
+                post_id: req.params.post_id,
                 user_id: req.body.user.id
 
             };
