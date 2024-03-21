@@ -48,7 +48,7 @@ export class PostCommentService {
 
     static async comment_on_post(req): Promise<ResponseObjectInterface> {
 
-        const response = new ResponseObject("Success", 200, {});
+        const response = new ResponseObject("Success", 201, {});
 
         try {
 
