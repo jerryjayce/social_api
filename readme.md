@@ -22,4 +22,4 @@ localhost:3000
 
 ## Postman collection
 
-[Postman link](https://documenter.getpostman.com/view/6871862/2sA2xnx9xS)
+[Postman link](https://documenter.getpostman.com/view/6871862/2sA358eRmh)
