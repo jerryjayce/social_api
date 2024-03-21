@@ -8,8 +8,6 @@ const auth = (req, res, next) => {
 
         const auth_header = req.headers['authorization'];
 
-        console.log({auth_header});
-
 
         if (auth_header && auth_header.startsWith('Bearer ')) {
 
